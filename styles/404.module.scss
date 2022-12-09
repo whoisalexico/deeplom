@@ -1,0 +1,23 @@
+.wrapper404{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  &>.title404 {
+    position: fixed;
+    z-index: 99;
+    font-size: 48px;
+    @media screen and (min-width: 1280px) and (max-width: 1600px) {
+      font-size: 32px;
+    }
+  }
+
+  &>.imageWrapper {
+
+    & > .image404 {
+    }
+  }
+}
+
+
+

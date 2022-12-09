@@ -1,0 +1,8 @@
+.puzzleWrapper{
+  background-image: url("../public/img/15puzzle/15puzzle.svg");
+  height: calc(100vh - 142px);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,108 @@
+.newGameWrapper {
+  height: calc(100% - 142px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > button {
+    background: #000;
+    color: #f3fcf0;
+    font-size: 18px;
+    font-weight: 800;
+    font-style: normal;
+    text-decoration: none;
+    height: 50px;
+    width: 250px;
+    border: 0 solid #000;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 0 6px 0 #2D2D2D;
+
+    &:hover {
+      background: linear-gradient(to right, #5482d0, #7d5ee3);
+    }
+  }
+}
+
+.gameWrapper {
+  user-select: none;
+  display: grid;
+  height: 100%;
+  place-items: center;
+
+  & > button {
+    margin-top: 0px;
+    background: #000;
+    color: #f3fcf0;
+    font-size: 18px;
+    font-weight: 800;
+    font-style: normal;
+    text-decoration: none;
+    height: 50px;
+    width: 250px;
+    border: 0 solid #000;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 0 6px 0 #2D2D2D;
+
+    &:hover {
+      background: linear-gradient(to right, #5482d0, #7d5ee3);
+    }
+  }
+}
+
+.win {
+  width: 600px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #fff;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
+  & > .buttons {
+    display: flex;
+    justify-content: space-around;
+
+    & > .navigationButton, a > .navigationButton {
+      margin-top: 0px;
+      background: #000;
+      color: #f3fcf0;
+      font-size: 18px;
+      font-weight: 800;
+      font-style: normal;
+      text-decoration: none;
+      height: 50px;
+      width: 250px;
+      border: 0 solid #000;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 6px 0 #2D2D2D;
+
+      &:hover {
+        background: linear-gradient(to right, #5482d0, #7d5ee3);
+      }
+
+      & > a:hover {
+        color: #f3fcf0;
+      }
+    }
+  }
+}
+
+.puzzleWrapper {
+  display: grid;
+  place-items: center;
+
+  & > .board {
+    width: 600px;
+    height: 600px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

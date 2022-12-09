@@ -1,0 +1,8 @@
+.card{
+  background-image: url("../../public/img/flipCardsGame/card-back.jpg");
+  background-size: cover;
+  width: 160px;
+  height: 100px;
+  position: absolute;
+  will-change: opacity, transform;
+}

@@ -1,0 +1,65 @@
+.main {
+  display: flex;
+  justify-content: space-around;
+  background-image: url('../public/img/home/illustration.svg');
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: calc(100vh - 142px);
+  & > .gold {
+   position: absolute;
+    left: -5%;
+    z-index: -1;
+  }
+
+  & > .heroWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 35px;
+    & > .title {
+      font-size: 80px;
+    }
+
+    & > .subtitle {
+      text-align: center;
+      font-size: 40px;
+      max-width: 240px;
+      font-weight: 300;
+      margin-bottom: 125px;
+    }
+
+    & > .description {
+      max-width: 580px;
+      font-size: 14px;
+    }
+  }
+
+  & > .heroIllustration {
+    margin-top: 40px;
+    position: relative;
+    width: 745px;
+    height: 615px;
+
+    & > .table {
+      position: absolute;
+      z-index: 99;
+      top: 335px;
+    }
+
+    & > .teddy {
+      position: absolute;
+      left: -200px;
+      top: 160px;
+    }
+
+    & > .girl {
+      position: absolute;
+    }
+
+  }
+}
+
+
+
+
