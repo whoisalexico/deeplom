@@ -36,7 +36,7 @@ export const getMatrixPosition = (index) => {
 export const isSwappable = (sIndex, fIndex) => {
     const {row: sRow, col: sCol} = getMatrixPosition(sIndex);
     const {row: fRow, col: fCol} = getMatrixPosition(fIndex);
-    return Math.abs(sRow - fRow) + Math.abs(sCol - fCol)/* === 1*/;
+    return Math.abs(sRow - fRow) + Math.abs(sCol - fCol) === 1;
 }
 
 export const swap = (tiles, start, finish) => {
