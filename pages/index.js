@@ -14,7 +14,6 @@ export default function Home() {
             </Head>
             <Navbar/>
             <main className={styles.main}>
-             {/*   <Image src={"/img/home/gold.svg"} width={822} height={660} className={styles.gold}/>*/}
                 <div className={styles.heroWrapper}>
                     <h1 className={styles.title}>Kids Games</h1>
                     <h2 className={styles.subtitle}>Fantasy and Imagination</h2>
@@ -22,11 +21,6 @@ export default function Home() {
                         animi consectetur distinctio doloremque fuga incidunt provident saepe similique! Accusamus at
                         deleniti eum expedita hic inventore obcaecati repellendus sequi vero voluptates. A harum, id
                         ipsum itaque labore obcaecati quod reprehenderit sunt!</p>
-                </div>
-                <div className={styles.heroIllustration}>
-{/*
-                    <Image src={"/img/home/illustration.svg"} width={745} height={615}/>
-*/}
                 </div>
             </main>
 
