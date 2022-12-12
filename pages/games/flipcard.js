@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styles from '../../styles/FlipCard.module.scss'
 import Navbar from "../../components/site-components/navbar";
 import Game from "../../components/flipcards/Game";
+import Head from "next/head";
 
 const Flipcard = () => {
     const [cardsAmount, setCardsAmount] = useState(null);
@@ -9,6 +10,11 @@ const Flipcard = () => {
 
     return (
         <>
+            <Head>
+                <title>Memo Game</title>
+                <meta name="description" content="Memo Game"/>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
             <Navbar/>
             <main className={styles.flipCard}>
                 {cardsAmount === null ? (

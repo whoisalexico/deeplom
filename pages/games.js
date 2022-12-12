@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from "next/link";
+import Head from "next/head";
 import {resetGame} from "../components/chess/redux/gameSlice";
 import {useAppDispatch} from "../components/chess/redux/hooks";
 import Navbar from "../components/site-components/navbar";
@@ -8,6 +9,11 @@ import styles from "../styles/games.module.scss";
 const Games = () => {
     return (
         <>
+            <Head>
+                <title>Games</title>
+                <meta name="description" content="Kids Games"/>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
             <Navbar/>
             <div className={styles.games}>
                 <ul>

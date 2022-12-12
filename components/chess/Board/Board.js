@@ -15,8 +15,6 @@ import Figure from "../Figures/Figure";
 import store from "../redux/store";
 import styles from "./Board.module.scss";
 import Link from "next/link";
-import Navbar from "../../site-components/navbar";
-import RadioButton from "../RadioButton/RadioButton";
 
 const Board = () => {
     const dispatch = useAppDispatch();
@@ -504,6 +502,7 @@ const Board = () => {
         )
     };
 
+
     useEffect(() => {
         checkIsKingInCheck(sides.ally);
     }, [figures]);
@@ -513,15 +512,24 @@ const Board = () => {
         window.addEventListener('resize', resizeBoard);
         dispatch(setGameStarted(true));
     }, []);
+
+    useEffect(()=>{
+        setTimeout(()=>{
+        if(gameColor === 'black'){
+            nextAIMove();
+        }}, 500)
+    }, [gameColor])
     return (
         <>
             <div className={styles.app}>
                 {gameColor === "" ? (
                     <div className={styles.side}>
-                        <h2>Choose side</h2>
-                        <div className={styles.buttons}>
-                            <button onClick={()=>{dispatch(setColor("white"))}}>White</button>
-                            <button onClick={()=>{dispatch(setColor("black"))}}>Black</button>
+                        <div className={styles.choiceWrapper}>
+                            <h2>Choose side</h2>
+                            <div className={styles.buttons}>
+                                <button onClick={() => {dispatch(setColor("white"))}}>White</button>
+                                <button onClick={() => {dispatch(setColor("black"))}}>Black</button>
+                            </div>
                         </div>
                     </div>
                 ) : (

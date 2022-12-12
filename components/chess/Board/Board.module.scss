@@ -5,40 +5,46 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  min-height: calc(100vh - 142px);
+  height: calc(100vh - 82px);
   padding: 48px;
 
   & > .side {
     width: 600px;
-    height: 300px;
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
 
-    & > .buttons {
+    & > .choiceWrapper{
       width: 100%;
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      align-items: center;
+      & > .buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
 
-      & > button {
-        background: #000;
-        color: #f3fcf0;
-        font-size: 18px;
-        font-weight: 800;
-        font-style: normal;
-        text-decoration: none;
-        height: 50px;
-        width: 150px;
-        border: 0 solid #000;
-        border-radius: 10px;
-        display: inline-block;
-        box-shadow: 0 0 6px 0 #2D2D2D;
+        & > button {
+          background: #000;
+          color: #f3fcf0;
+          font-size: 18px;
+          font-weight: 800;
+          font-style: normal;
+          text-decoration: none;
+          height: 50px;
+          width: 150px;
+          border: 0 solid #000;
+          border-radius: 10px;
+          display: inline-block;
+          box-shadow: 0 0 6px 0 #2D2D2D;
 
-        &:hover {
-          background: linear-gradient(to right, #5482d0, #7d5ee3);
+          &:hover {
+            background: linear-gradient(to right, #5482d0, #7d5ee3);
+          }
         }
       }
     }
+
   }
 
   & > .boardWrapper {
