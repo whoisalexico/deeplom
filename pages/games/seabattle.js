@@ -1,11 +1,12 @@
-import React, {useEffect, useRef, useState} from "react";
-import Navbar from "../../components/layout/navbar";
-import Board from "../../components/chess/Board/Board";
+import React, {useEffect} from 'react';
 import Head from "next/head";
-import store from "../../components/chess/redux/store";
+import Navbar from "../../components/layout/navbar";
+import {store} from "../../components/seabattle/redux/store";
 import {Provider} from "react-redux";
+import Game from "../../components/seabattle/game";
 
-const Chess = () => {
+const Seabattle = () => {
+
     return (
         <>
             <Provider store={store}>
@@ -15,9 +16,10 @@ const Chess = () => {
                     <link rel="icon" href="/favicon.ico"/>
                 </Head>
                 <Navbar/>
-                <Board/>
+                <Game/>
             </Provider>
         </>
-    )
+    );
 };
-export default Chess;
+
+export default Seabattle;

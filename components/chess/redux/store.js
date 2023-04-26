@@ -3,7 +3,7 @@ import gameReducer from "./gameSlice";
 
 const store = configureStore({
     reducer: {
-        game: gameReducer
+        chess: gameReducer
     },
 })
 

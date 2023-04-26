@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from '../../styles/FlipCard.module.scss'
-import Navbar from "../../components/site-components/navbar";
+import Navbar from "../../components/layout/navbar";
 import Game from "../../components/flipcards/Game";
 import Head from "next/head";
 

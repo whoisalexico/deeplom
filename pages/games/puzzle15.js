@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
-import Navbar from "../../components/site-components/navbar";
+import Navbar from "../../components/layout/navbar";
 import Board from "../../components/15puzzle/Board";
 import styles from "../../styles/Puzzle15.module.scss"
 const Puzzle15 = () => {

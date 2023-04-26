@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Navbar from "../components/site-components/navbar";
+import Navbar from "../components/layout/navbar";
 import Head from "next/head";
 import styles from "../styles/404.module.scss"
 

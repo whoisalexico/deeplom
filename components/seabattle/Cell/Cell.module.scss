@@ -1,0 +1,19 @@
+.cell {
+  cursor: pointer;
+}
+.cell_miss {
+  background-image: url('./img/cross.svg');
+  background-size: 10px;
+}
+
+.cell_hit {
+  background-image: url('./img/fire.svg');
+}
+
+.cell_dead {
+  background-image: url('./img/bomb.svg');
+}
+
+.cell_ship {
+  background-image: url('./img/ship.svg');
+}

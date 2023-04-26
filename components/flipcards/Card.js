@@ -3,7 +3,7 @@ import {useSpring, animated} from "react-spring";
 import styles from "./Card.module.scss"
 
 
-const Card = ({id, color, game, flippedCardPairs, setFlippedCardPairs, flippedIndexes, setFlippedIndexes}) => {
+const Card = ({id, color, cardGame, flippedCardPairs, setFlippedCardPairs, flippedIndexes, setFlippedIndexes}) => {
     const [flipped, setFlipped] = useState(false);
     const {transform, opacity} = useSpring({
         opacity: flipped ? 1 : 0,
@@ -25,13 +25,13 @@ const Card = ({id, color, game, flippedCardPairs, setFlippedCardPairs, flippedIn
     }, [flippedIndexes]);
 
     const onClickCard = () => {
-        if (!game[id].flipped && flippedCardPairs % 3 === 0) {
+        if (!cardGame[id].flipped && flippedCardPairs % 3 === 0) {
             setFlipped((state) => !state);
             setFlippedCardPairs(flippedCardPairs + 1);
             const newIndexes = [...flippedIndexes];
             newIndexes.push(id);
             setFlippedIndexes(newIndexes);
-        } else if (flippedCardPairs % 3 === 1 && !game[id].flipped && flippedIndexes.indexOf(id) < 0) {
+        } else if (flippedCardPairs % 3 === 1 && !cardGame[id].flipped && flippedIndexes.indexOf(id) < 0) {
             setFlipped((state) => !state);
             setFlippedCardPairs(flippedCardPairs + 1);
             const newIndexes = [...flippedIndexes];

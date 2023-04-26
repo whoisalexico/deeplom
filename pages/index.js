@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.scss'
-import Navbar from "../components/site-components/navbar";
+import Navbar from "../components/layout/navbar";
 
 export default function Home() {
     return (

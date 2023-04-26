@@ -1,4 +1,3 @@
-import { Colors } from "../types";
 import { initialFigures } from "../Board/positionInital";
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
@@ -35,8 +34,8 @@ export const gameSlice = createSlice({
     }
 });
 export const { setColor, changeFigurePosition, removeFigure, setGameWon, resetGame, setGameStarted } = gameSlice.actions;
-export const selectFigures = (state) => state.game.figures;
-export const selectColor = (state) => state.game.color;
-export const selectGameWon = (state) => state.game.gameWon;
-export const selectIsGameStarted = (state) => state.game.isGameStarted;
+export const selectFigures = (state) => state.chess.figures;
+export const selectColor = (state) => state.chess.color;
+export const selectGameWon = (state) => state.chess.gameWon;
+export const selectIsGameStarted = (state) => state.chess.isGameStarted;
 export default gameSlice.reducer;

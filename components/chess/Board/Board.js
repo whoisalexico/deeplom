@@ -430,7 +430,7 @@ const Board = () => {
         return obj;
     };
     const nextAIMove = () => {
-        const figures = store.getState().game.figures;
+        const figures = store.getState().chess.figures;
         const getRandomElementOfArray = (arr) => {
             return arr[Math.floor(Math.random() * arr.length)];
         };

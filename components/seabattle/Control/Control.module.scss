@@ -1,0 +1,21 @@
+.control {
+  position: relative;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  outline: none;
+  text-decoration: none;
+  letter-spacing: 6px;
+  border: 2px solid rgb(255, 66, 29);
+  color: #f13000;
+  transition: color .5s;
+  overflow: hidden;
+  margin: 30px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: calc(16px + 4 * ((100vw - 320px) / (1920 - 320)));
+}
+.control:hover {
+  color: #000;
+  background-color: #f13000;
+}

@@ -3,7 +3,7 @@ import Card from "./Card";
 import styles from "./Game.module.scss"
 
 const Game = ({options, setOptions}) => {
-    const [game, setGame] = useState([]);
+    const [cardGame, setCardGame] = useState([]);
     const [flippedCardPairs, setFlippedCardPairs] = useState(0);
     const [flippedIndexes, setFlippedIndexes] = useState([]);
     const colors = [
@@ -46,17 +46,17 @@ const Game = ({options, setOptions}) => {
             newGame.push(secondOption);
         }
         const shuffledGame = newGame.sort(() => Math.random() - 0.5)
-        setGame(shuffledGame);
+        setCardGame(shuffledGame);
     }, []);
 
 
     useEffect(() => {
-        const finished = !game.some((card) => !card.flipped);
-        if (finished && game.length > 0) {
+        const finished = !cardGame.some((card) => !card.flipped);
+        if (finished && cardGame.length > 0) {
             setTimeout(() => {
                 const newGame = confirm("You Win!" + " New Game?");
                 if (newGame) {
-                    const gameLength = game.length;
+                    const gameLength = cardGame.length;
                     setOptions(null);
                     setTimeout(() => {
                         setOptions(gameLength);
@@ -67,16 +67,16 @@ const Game = ({options, setOptions}) => {
             }, 500);
 
         }
-    }, [game]);
+    }, [cardGame]);
 
 
     if (flippedIndexes.length === 2) {
-        const match = game[flippedIndexes[0]].colorId === game[flippedIndexes[1]].colorId;
+        const match = cardGame[flippedIndexes[0]].colorId === cardGame[flippedIndexes[1]].colorId;
         if (match) {
-            const newGame = [...game];
+            const newGame = [...cardGame];
             newGame[flippedIndexes[0]].flipped = true;
             newGame[flippedIndexes[1]].flipped = true;
-            setGame(newGame);
+            setCardGame(newGame);
             const newIndexes = [...flippedIndexes];
             newIndexes.push(false)
             setFlippedIndexes(newIndexes);
@@ -87,14 +87,14 @@ const Game = ({options, setOptions}) => {
         }
     }
 
-    if (game.length === 0)
+    if (cardGame.length === 0)
         return <div>loading.................</div>
     else {
         return (
             <div id={styles.cards}>
-                {game.map((card, index) => (
+                {cardGame.map((card, index) => (
                     <div className={styles.card} key={index}>
-                        <Card id={index} color={card.color} game={game} flippedCardPairs={flippedCardPairs}
+                        <Card id={index} color={card.color} cardGame={cardGame} flippedCardPairs={flippedCardPairs}
                               setFlippedCardPairs={setFlippedCardPairs} flippedIndexes={flippedIndexes}
                               setFlippedIndexes={setFlippedIndexes}/>
                     </div>
