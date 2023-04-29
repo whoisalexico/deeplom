@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {useAuth} from "../context/AuthContext";
-import {router} from "next/client";
+import {useRouter} from "next/router";
 
 const Signup = () => {
+    const router = useRouter();
     const {user, signup} = useAuth();
     console.log(user)
     const [data, setData] = useState({
