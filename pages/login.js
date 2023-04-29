@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import firebase from "firebase/app";
 import {useAuth} from "../context/AuthContext";
 import {router} from "next/client";
 import Link from "next/link";
+import {TextField} from "@mui/material";
+import s from '../styles/Auth.module.scss'
+import Navbar from "../components/layout/navbar";
+
 
 const Login = () => {
     const {user, login} = useAuth();
@@ -25,22 +28,20 @@ const Login = () => {
 
     return (
         <>
-            <form onSubmit={handleLogin}>
-                <label>
-                    Email:
-                    <input type="email" required onChange={(e) => setData({...data, email: e.target.value})}
-                           value={data.email}/>
-                </label>
-                <label>
-                    Password:
-                    <input type="password" required onChange={(e) => setData({...data, password: e.target.value})}
-                           value={data.password}/>
-                </label>
-                <button type="submit">Log In</button>
-            </form>
+            <Navbar/>
+            <div className={s.auth}>
+                <form className={s.authForm} onSubmit={handleLogin}>
+                    <TextField required id="standard-required" variant='standard' label='Email' type="email" defaultValue=""
+                               value={data.email} onChange={(e) => setData({...data, email: e.target.value})}/>
+                    <TextField required id="standard-required" variant='standard' label='Password' type="password" defaultValue=""
+                               value={data.password} onChange={(e) => setData({...data, password: e.target.value})}/>
+                    <button type="submit">Log In</button>
+                    <p>Don't have account? Create now!</p>
+                    <Link href={'/signup'}>Sign Up</Link>
+                </form>
 
-            <p>Don't have account? Create now!</p>
-            <Link href={'/signup'}>Sign Up</Link>
+
+            </div>
         </>
     );
 };

@@ -3,10 +3,10 @@ import ComputerBoard from "./Computer/ComputerBoard";
 import Board from "./Board/Board";
 import {useDispatch, useSelector} from "react-redux";
 import {gameOptions} from "./utils/game";
-import {setGame} from "./redux/actions/actionCreators";
+import {resetStore, setGame} from "./redux/actions/actionCreators";
 import {setPcSettings} from "./redux/actions/actionCreatorsPC";
 import {store} from "./redux/store";
-//"react-redux": "^8.0.5",
+
 
 
 const Game = () => {
@@ -31,6 +31,7 @@ const Game = () => {
 
 
     useEffect(() => { // при рендере компонента, будет происходит генерация кораблей, если их нет в store
+        dispatch(resetStore());
         if (ships.length === 0) {
             genShip()
         }

@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth'
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyAp1_4x5CPs3j0te1lftU8EXxjcKDMPOaI",
     authDomain: "deeplom-project.firebaseapp.com",
@@ -12,3 +13,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
+
+if (typeof window !== 'undefined') {
+    window.addEventListener('unload', function (event) {
+        auth.signOut();
+    });
+}

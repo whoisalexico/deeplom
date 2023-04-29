@@ -1,0 +1,15 @@
+.auth {
+  background-image: url('../public/img/auth/auth.svg');
+  height: calc(100vh - 82px);
+  background-repeat: no-repeat;
+  justify-content: flex-end;
+  display: flex;
+
+  &Form {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 80px 160px;
+  }
+}

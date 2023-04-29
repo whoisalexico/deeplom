@@ -5,17 +5,18 @@ import {store} from "../../components/seabattle/redux/store";
 import {Provider} from "react-redux";
 import Game from "../../components/seabattle/game";
 
+
 const Seabattle = () => {
 
     return (
         <>
+            <Head>
+                <title>Chess Game</title>
+                <meta name="description" content="Chess Game"/>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
+            <Navbar/>
             <Provider store={store}>
-                <Head>
-                    <title>Chess Game</title>
-                    <meta name="description" content="Chess Game"/>
-                    <link rel="icon" href="/favicon.ico"/>
-                </Head>
-                <Navbar/>
                 <Game/>
             </Provider>
         </>
