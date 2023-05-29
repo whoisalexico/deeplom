@@ -99,6 +99,7 @@
   place-items: center;
 
   & > .board {
+    border: 2px solid black;
     width: 600px;
     height: 600px;
     display: grid;

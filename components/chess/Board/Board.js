@@ -15,13 +15,35 @@ import Figure from "../Figures/Figure";
 import store from "../redux/store";
 import styles from "./Board.module.scss";
 import Link from "next/link";
+import {useAuth} from "../../../context/AuthContext";
+import {collection, addDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
 
 const Board = () => {
+    const {user} = useAuth();
+    const game = 'Chess';
     const dispatch = useAppDispatch();
     const gameColor = useAppSelector(selectColor);
     const figures = useAppSelector(selectFigures);
     const color = useAppSelector(selectColor);
     const gameWon = useAppSelector(selectGameWon);
+    const [status, setStatus] = useState(false)
+    const pts = Math.floor(Math.random() * (1200-800) + 800);
+    const setPoints = async (pts, game) => {
+        const db = getFirestore();
+        const collectionRef = collection(db, "users");
+        const q = query(collectionRef, where("id", "==", user.uid))
+        const snap = await getDocs(q);
+        let nickname;
+        snap.forEach((doc)=>{
+            const data = doc.data();
+            nickname = data.nickname;
+        })
+        const docRef = await addDoc(collection(db, "ChessLeaderboard"),{
+            nickname: nickname,
+            game: game,
+            score: pts,
+        })
+    }
 
     const radioChanged = (id) => {
         dispatch(setColor(id));
@@ -496,12 +518,11 @@ const Board = () => {
         return (
             <div className={styles.gameWon}>
                 <h2 className={styles.gameWonTitle}>{color} won</h2>
-                <Link href="/games" className={styles.gameWonButton}>Back to games</Link>
+                <Link href="/games" className={styles.gameWonButton} onClick={()=>setPoints(pts, game)}>Back to games</Link>
                 <Link href="chess" onClick={() => startNewGame()}>Play again</Link>
             </div>
         )
     };
-
 
     useEffect(() => {
         checkIsKingInCheck(sides.ally);

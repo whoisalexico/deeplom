@@ -15,7 +15,6 @@ const Flipcard = () => {
                 <meta name="description" content="Memo Game"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <Navbar/>
             <main className={styles.flipCard}>
                 {cardsAmount === null ? (
                     <div className={styles.difficulty}>

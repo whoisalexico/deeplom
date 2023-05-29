@@ -4,9 +4,10 @@ import styles from './Tile.module.scss'
 
 
 const Tile = ({tile, index, tileClick}) => {
+    console.log(tile, index);
     return (
-        <li className={styles.tile} onClick={() => tileClick(index)} style={{
-            opacity: tile === TILE_COUNT - 1 ? 0 : 1,
+        <li className={tile !== index ? styles.tile : styles.correctTile} onClick={() => tileClick(index)} style={{
+            opacity: tile === TILE_COUNT - 1 ? 0 : 1, border: "2px solid black"
         }}>
             {`${tile + 1}`}
         </li>

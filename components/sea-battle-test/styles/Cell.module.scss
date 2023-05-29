@@ -1,0 +1,35 @@
+.cell {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: #e0e0e0;
+}
+
+.empty {
+  //display: none;
+}
+
+.ship {
+  color: #555;
+}
+
+.hit {
+  background-color: #f00;
+  color: #fff;
+}
+
+.miss {
+  background-color: #bbb;
+  color: #fff;
+}

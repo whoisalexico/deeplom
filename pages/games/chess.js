@@ -14,7 +14,6 @@ const Chess = () => {
                     <meta name="description" content="Chess Game"/>
                     <link rel="icon" href="/favicon.ico"/>
                 </Head>
-                <Navbar/>
                 <Board/>
             </Provider>
         </>

@@ -1,6 +1,9 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import { auth } from '../firebase/firebase'
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+
 const AuthContext = createContext({});
 export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({children}) => {
@@ -12,7 +15,7 @@ export const AuthContextProvider = ({children}) => {
                 setUser({
                     uid: user.uid,
                     email: user.email,
-                    displayName: user.displayName,
+                    nickname: user.displayName,
                 });
             }
             else{
@@ -22,8 +25,21 @@ export const AuthContextProvider = ({children}) => {
         });
         return ()=> unsubscribe();
     },[]);
-    const signup = (email, password)=>{
-        return createUserWithEmailAndPassword(auth, email, password);
+    const signup = async (email, password, nickname)=>{
+        try{
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const db = getFirestore();
+            const usersCollection = collection(db, "users");
+            await addDoc(usersCollection, {
+                id: userCredential.user.uid,
+                email: userCredential.user.email,
+                nickname: nickname,
+            });
+            console.log(user);
+        }catch (e){
+            console.log(e)
+        }
+        //return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const login = (email, password) =>{

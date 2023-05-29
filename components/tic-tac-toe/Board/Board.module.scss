@@ -1,0 +1,8 @@
+.board {
+  max-width: calc(150px * var(--size));
+  max-height: calc(150px * var(--size));
+  display: grid;
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-gap: 1px;
+  margin-top: 5px;
+}

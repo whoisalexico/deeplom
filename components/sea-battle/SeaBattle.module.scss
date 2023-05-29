@@ -1,0 +1,59 @@
+.game_container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.player_field,
+.computer_field {
+  display: grid;
+  grid-template-columns: repeat(1, 400px);
+  grid-template-rows: repeat(10, 40px);
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.cell {
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+}
+
+.ship {
+  background-color: #333;
+}
+
+.miss {
+  background-color: #bbb;
+}
+
+.hit {
+  background-color: #ff5555;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.game_over {
+  margin-top: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #555;
+}
