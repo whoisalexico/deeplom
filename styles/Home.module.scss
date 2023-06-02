@@ -4,7 +4,7 @@
   background-image: url('../public/img/home/illustration.svg');
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
-  height: calc(100vh - 82px);
+  height: calc(100vh - 106px);
 
   & > .heroWrapper {
     display: flex;
@@ -22,7 +22,7 @@
       font-size: 40px;
       max-width: 240px;
       font-weight: 300;
-      margin-bottom: 125px;
+      margin-bottom: 175px;
     }
 
     & > .description {

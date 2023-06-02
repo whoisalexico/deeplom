@@ -1,7 +1,5 @@
 import React from 'react';
 import Head from "next/head";
-
-import Navbar from "../../components/layout/navbar";
 import Game from "../../components/tic-tac-toe/Game/Game";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 const TicTacToe = () => {

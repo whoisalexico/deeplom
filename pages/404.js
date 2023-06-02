@@ -2,19 +2,23 @@ import Image from "next/image";
 import Navbar from "../components/layout/navbar";
 import Head from "next/head";
 import styles from "../styles/404.module.scss"
+import {useTranslation} from "next-i18next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 export default function Custom404() {
+    const {t} = useTranslation("common");
+
+
     return (
         <>
             <Head>
-                <title>Page not found</title>
+                <title>{t("p404")}</title>
                 <meta name="description" content="Page not found"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <Navbar/>
             <section>
                 <div className={styles.wrapper404}>
-                    <h1 className={styles.title404}>Error 404 — Page not found</h1>
+                    <h1 className={styles.title404}>{t("e404")}</h1>
                     <div className={styles.imageWrapper}>
                         <Image src={"/img/404/404.svg"} width={1840} height={688} className={styles.image404}/>
                     </div>
@@ -22,4 +26,14 @@ export default function Custom404() {
             </section>
         </>
     )
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+            ])),
+        },
+    };
 }

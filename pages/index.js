@@ -20,11 +20,7 @@ export default function Home() {
             <main className={styles.main}>
                 <div className={styles.heroWrapper}>
                     <h1 className={styles.title}>{t('title')}</h1>
-                    <h2 className={styles.subtitle}>Fantasy and Imagination</h2>
-                    <p className={styles.description}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias,
-                        animi consectetur distinctio doloremque fuga incidunt provident saepe similique! Accusamus at
-                        deleniti eum expedita hic inventore obcaecati repellendus sequi vero voluptates. A harum, id
-                        ipsum itaque labore obcaecati quod reprehenderit sunt!</p>
+                    <h2 className={styles.subtitle}>{t('subtitle')}</h2>
                 </div>
             </main>
 

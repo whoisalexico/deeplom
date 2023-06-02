@@ -1,11 +1,44 @@
 import React, {useEffect, useState} from 'react';
 import Card from "./Card";
 import styles from "./Game.module.scss"
+import Link from "next/link";
+import {useAuth} from "../../context/AuthContext";
+import {addDoc, collection, getDocs, getFirestore, query, where} from "firebase/firestore";
+import {useTranslation} from "next-i18next";
 
 const Game = ({options, setOptions}) => {
     const [cardGame, setCardGame] = useState([]);
     const [flippedCardPairs, setFlippedCardPairs] = useState(0);
     const [flippedIndexes, setFlippedIndexes] = useState([]);
+    const [isFinished, setFinished] = useState(false)
+    const [isNewGame, setIsNewGame] = useState(false)
+    const {user} = useAuth();
+    const game = 'Find Pair';
+    const pts = Math.floor(Math.random() * (1200-800) + 800);
+    const {t} = useTranslation("common")
+
+
+    const setPoints = async (pts, game) => {
+        try {
+            const db = getFirestore();
+            const collectionRef = collection(db, "users");
+            const q = query(collectionRef, where("id", "==", user.uid))
+            const snap = await getDocs(q);
+            let nickname;
+            snap.forEach((doc)=>{
+                const data = doc.data();
+                nickname = data.nickname;
+            })
+            const docRef = await addDoc(collection(db, "FindPairLeaderboard"),{
+                nickname: nickname,
+                game: game,
+                score: pts,
+            })
+        }catch (e) {
+
+        }
+
+    }
     const colors = [
         '#080708',
         '#3772FF',
@@ -16,7 +49,7 @@ const Game = ({options, setOptions}) => {
         '#D56F3E',
         '#3C787E',
         '#C7EF00',
-        '#FFE9F3',
+        '#e0bacc',
         '#B27092',
         '#EF271B',
         '#00C49A',
@@ -26,6 +59,20 @@ const Game = ({options, setOptions}) => {
         '#8093F1',
         '#F7AEF8'
     ]
+
+
+    const newGame = () => {
+        setIsNewGame(!isNewGame)
+        if (isNewGame) {
+            const gameLength = cardGame.length;
+            setOptions(null);
+            setTimeout(() => {
+                setOptions(gameLength);
+            }, 5);
+        } else {
+            setOptions(null);
+        }
+    }
 
     useEffect(() => {
         const newGame = [];
@@ -49,25 +96,10 @@ const Game = ({options, setOptions}) => {
         setCardGame(shuffledGame);
     }, []);
 
-
     useEffect(() => {
-        const finished = !cardGame.some((card) => !card.flipped);
-        if (finished && cardGame.length > 0) {
-            setTimeout(() => {
-                const newGame = confirm("You Win!" + " New Game?");
-                if (newGame) {
-                    const gameLength = cardGame.length;
-                    setOptions(null);
-                    setTimeout(() => {
-                        setOptions(gameLength);
-                    }, 5);
-                } else {
-                    setOptions(null);
-                }
-            }, 500);
-
-        }
+        setFinished(!cardGame.some((card) => !card.flipped));
     }, [cardGame]);
+
 
 
     if (flippedIndexes.length === 2) {
@@ -91,15 +123,26 @@ const Game = ({options, setOptions}) => {
         return <div>loading.................</div>
     else {
         return (
-            <div id={styles.cards}>
-                {cardGame.map((card, index) => (
-                    <div className={styles.card} key={index}>
-                        <Card id={index} color={card.color} cardGame={cardGame} flippedCardPairs={flippedCardPairs}
-                              setFlippedCardPairs={setFlippedCardPairs} flippedIndexes={flippedIndexes}
-                              setFlippedIndexes={setFlippedIndexes}/>
+            <>
+                {isFinished && cardGame.length > 0 ? (
+                    <div className={styles.modal}>
+                        <p className={styles.congratz}>{t("uwon")}</p>
+                        <Link href="find-pair" onClick={()=>{newGame()}}>{t("playagain")}</Link>
+                        <Link onClick={()=>{setPoints(pts, game)}} href="/games">{t("backtogames")}</Link>
                     </div>
-                ))}
-            </div>
+                ) : (
+                    <div id={styles.cards}>
+                        {cardGame.map((card, index) => (
+                            <div className={styles.card} key={index}>
+                                <Card id={index} color={card.color} cardGame={cardGame}
+                                      flippedCardPairs={flippedCardPairs}
+                                      setFlippedCardPairs={setFlippedCardPairs} flippedIndexes={flippedIndexes}
+                                      setFlippedIndexes={setFlippedIndexes}/>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </>
         )
     }
 };

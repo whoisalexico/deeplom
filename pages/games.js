@@ -21,7 +21,7 @@ const Games = () => {
             <div className={styles.games}>
                 <ul>
                     <li><Link href={"/games/chess"} onClick={() => useAppDispatch(resetGame())}>{t("chess")}</Link></li>
-                    <li><Link href={"/games/flipcard"}>{t("flipcard")}</Link></li>
+                    <li><Link href={"/games/find-pair"}>{t("flipcard")}</Link></li>
                     <li><Link href={"/games/tags"}>{t("puzzle")}</Link></li>
                     <li><Link href={"/games/tic-tac-toe"}>{t("tictactoe")}</Link></li>
                     <li><Link href={"/games/sea-battle"}>{t("seabattle")}</Link></li>

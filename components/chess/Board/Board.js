@@ -17,8 +17,11 @@ import styles from "./Board.module.scss";
 import Link from "next/link";
 import {useAuth} from "../../../context/AuthContext";
 import {collection, addDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
+import {useTranslation} from "next-i18next";
 
 const Board = () => {
+    const {t} = useTranslation("common")
+
     const {user} = useAuth();
     const game = 'Chess';
     const dispatch = useAppDispatch();
@@ -29,20 +32,25 @@ const Board = () => {
     const [status, setStatus] = useState(false)
     const pts = Math.floor(Math.random() * (1200-800) + 800);
     const setPoints = async (pts, game) => {
-        const db = getFirestore();
-        const collectionRef = collection(db, "users");
-        const q = query(collectionRef, where("id", "==", user.uid))
-        const snap = await getDocs(q);
-        let nickname;
-        snap.forEach((doc)=>{
-            const data = doc.data();
-            nickname = data.nickname;
-        })
-        const docRef = await addDoc(collection(db, "ChessLeaderboard"),{
-            nickname: nickname,
-            game: game,
-            score: pts,
-        })
+        try {
+            const db = getFirestore();
+            const collectionRef = collection(db, "users");
+            const q = query(collectionRef, where("id", "==", user.uid))
+            const snap = await getDocs(q);
+            let nickname;
+            snap.forEach((doc)=>{
+                const data = doc.data();
+                nickname = data.nickname;
+            })
+            const docRef = await addDoc(collection(db, "ChessLeaderboard"),{
+                nickname: nickname,
+                game: game,
+                score: pts,
+            })    
+        }catch (e) {
+            
+        }
+        
     }
 
     const radioChanged = (id) => {
@@ -517,9 +525,9 @@ const Board = () => {
         const color = gameWon[0].toUpperCase() + gameWon.slice(1);
         return (
             <div className={styles.gameWon}>
-                <h2 className={styles.gameWonTitle}>{color} won</h2>
-                <Link href="/games" className={styles.gameWonButton} onClick={()=>setPoints(pts, game)}>Back to games</Link>
-                <Link href="chess" onClick={() => startNewGame()}>Play again</Link>
+                <h2 className={styles.gameWonTitle}>{t(`chess${color}`)} {t("chesswon")}</h2>
+                <Link href="/games" className={styles.gameWonButton} onClick={()=>setPoints(pts, game)}>{t("backtogames")}</Link>
+                <Link href="chess" onClick={() => {startNewGame()}}>{t("playagain")}</Link>
             </div>
         )
     };
@@ -546,11 +554,12 @@ const Board = () => {
                 {gameColor === "" ? (
                     <div className={styles.side}>
                         <div className={styles.choiceWrapper}>
-                            <h2>Choose side</h2>
+                            <h2>{t('chessside')}</h2>
                             <div className={styles.buttons}>
-                                <button onClick={() => {dispatch(setColor("white"))}}>White</button>
-                                <button onClick={() => {dispatch(setColor("black"))}}>Black</button>
+                                <button onClick={() => {dispatch(setColor("white"))}}>{t('chessWhite')}</button>
+                                <button onClick={() => {dispatch(setColor("black"))}}>{t('chessBlack')}</button>
                             </div>
+                            <Link href="/games" className={styles.backToGames} onClick={()=>setPoints(pts, game)}>{t("backtogames")}</Link>
                         </div>
                     </div>
                 ) : (
