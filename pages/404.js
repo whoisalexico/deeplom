@@ -19,9 +19,6 @@ export default function Custom404() {
             <section>
                 <div className={styles.wrapper404}>
                     <h1 className={styles.title404}>{t("e404")}</h1>
-                    <div className={styles.imageWrapper}>
-                        <Image src={"/img/404/404.svg"} width={1840} height={688} className={styles.image404}/>
-                    </div>
                 </div>
             </section>
         </>

@@ -60,29 +60,31 @@ const Rules = () => {
                 <meta name="description" content={t("rules")}/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography><p className={s.gameTitle}>{t("chess")}</p></Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        <p className={s.gameDescription}>{t("chessdesc")} <br/> {t("chessgoal")}</p>
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography>{t("flipcard")}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                        sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
+            <div className={s.rulesWrapper}>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                        <Typography><p className={s.gameTitle}>{t("chess")}</p></Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <p className={s.gameDescription}>{t("chessdesc")} <br/> {t("chessgoal")}</p>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                    <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                        <Typography>{t("flipcard")}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
+                            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                            sit amet blandit leo lobortis eget.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+            </div>
         </>
     );
 };

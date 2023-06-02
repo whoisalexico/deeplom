@@ -1,8 +1,10 @@
 .wrapper404{
+  background-image: url("../public/img/404/404.svg");
+  background-size: cover;
+  height: calc(100vh - 164px);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 60px;
   &>.title404 {
     position: fixed;
     z-index: 99;

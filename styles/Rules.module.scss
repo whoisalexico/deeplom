@@ -12,3 +12,8 @@
   margin: 0;
   padding: 10px;
 }
+
+.rulesWrapper{
+  height: calc(100vh - 164px);
+  overflow-y: auto;
+}

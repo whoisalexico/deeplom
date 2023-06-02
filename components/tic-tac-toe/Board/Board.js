@@ -1,11 +1,43 @@
 import React, {useState} from "react";
 import Square from "../Square/Square";
 import s from './Board.module.scss'
+import Link from "next/link";
+import {useTranslation} from "next-i18next";
+import {useAuth} from "../../../context/AuthContext";
+import {addDoc, collection, getDocs, getFirestore, query, where} from "firebase/firestore";
 
 function Board({setScores, size}) {
     const [nodes, setNodes] = useState({});
     const [board, setBoard] = useState(Array(size * size).fill(""));
     const [winLine, setWinLine] = useState([]);
+    const {user} = useAuth();
+    const game = 'Tic Tac Toe';
+    const pts = Math.floor(Math.random() * (1500 - 1000) + 1000);
+    const {t} = useTranslation("common")
+
+
+    const setPoints = async (pts, game) => {
+        try {
+            const db = getFirestore();
+            const collectionRef = collection(db, "users");
+            const q = query(collectionRef, where("id", "==", user.uid))
+            const snap = await getDocs(q);
+            let nickname;
+            snap.forEach((doc) => {
+                const data = doc.data();
+                nickname = data.nickname;
+            })
+            const docRef = await addDoc(collection(db, "TicTacToeLeaderboard"), {
+                nickname: nickname,
+                game: game,
+                score: pts,
+            })
+        } catch (e) {
+
+        }
+
+    }
+
 
     const gameReset = () => {
         setWinLine([]);
@@ -203,17 +235,28 @@ function Board({setScores, size}) {
     };
     return (
         <div className={s.board} style={{"--size": size}}>
-            {board.map((val, i) => {
-                return (
-                    <Square
-                        key={i}
-                        id={i}
-                        value={val}
-                        handleClick={handleClick}
-                        board={winLine}
-                    />
-                );
-            })}
+            {isTerminal(board).winner === "X" || isTerminal(board).winner === "O" ? (
+                <div className={s.modal}>
+                    <p>{isTerminal(board).winner === "X" ? t("uwon") : t("ulose")}</p>
+                    <Link onClick={() => gameReset()} href="tic-tac-toe">{t("playagain")}</Link>
+                    <Link onClick={() => setPoints(pts,game)} href="/games">{t("backtogames")}</Link>
+                </div>
+            ) : (
+                <>
+                    {board.map((val, i) => {
+                        return (
+                            <Square
+                                key={i}
+                                id={i}
+                                value={val}
+                                handleClick={handleClick}
+                                board={winLine}
+                            />
+                        );
+                    })}
+                </>
+            )}
+
         </div>
     );
 }

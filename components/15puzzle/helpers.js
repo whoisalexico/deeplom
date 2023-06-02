@@ -23,7 +23,7 @@ export const shuffle = (tiles) => {
         ...tiles.filter((tile) => tile !== tiles.length - 1).sort(() => Math.random() - 0.5),
         tiles.length - 1,
     ];
-    return isSolvable(shuffledTiles) && !isSolved(shuffledTiles) ? shuffledTiles : shuffle(shuffledTiles);
+    return isSolvable(shuffledTiles) && isSolved(shuffledTiles) ? shuffledTiles : shuffle(shuffledTiles);
 }
 
 export const getMatrixPosition = (index) => {

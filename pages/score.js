@@ -132,8 +132,7 @@ const Score = () => {
                         <DataGrid sx={{color: '#000', backgroundColor: "#fff"}} columns={columns} rows={rows} disableRowSelectionOnClick={true} initialState={{pagination: {paginationModel: {pageSize: 10,},},}}/>
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        <DataGrid sx={{color: '#000', backgroundColor: "#fff"}} columns={columns} rows={rows}
-                                  disableRowSelectionOnClick={true}/>
+                        <DataGrid sx={{color: '#000', backgroundColor: "#fff"}} columns={columns} rows={rows} disableRowSelectionOnClick={true} initialState={{pagination: {paginationModel: {pageSize: 10,},},}}/>
                     </TabPanel>
                 </Box>
             </div>

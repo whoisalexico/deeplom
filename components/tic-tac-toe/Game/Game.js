@@ -13,7 +13,6 @@ function Game() {
     return (
         <div className={s.game}>
             <Board setScores={setScores} size={3}/>
-            <Scores scores={scores}/>
         </div>
     );
 }

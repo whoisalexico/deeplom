@@ -1,5 +1,7 @@
 {
     "chess": "Chess",
+    "ru": "Russian",
+    "en": "English",
     "title": "Kids Games",
     "home": "Home",
     "games": "Games",
@@ -24,9 +26,13 @@
     "nickname": "Nickname",
     "gameTitle": "Game Title",
     "pts": "points",
+    "e404": "Error 404 - Page Not Found",
+    "p404": "Error 404",
     "startnewgame": "Start New Game",
     "reset": "Reset Game",
+    "graduationproject": "Graduation Project. Developed by Alexey Volosevch Group 44TP Minsk State College of Digital Technologies, 2023",
     "uwon": "Congratulations! You Win!",
+    "ulose": "You Lose. Don't be upset.",
     "chessdesc": "Chess is a game played between two opponents on opposite sides of a board containing 64 squares of alternating colors. Each player has 16 pieces: 1 king, 1 queen, 2 rooks, 2 bishops, 2 knights, and 8 pawns.",
     "chessgoal": "The goal of the game is to checkmate the other king. Checkmate happens when the king is in a position to be captured (in check) and cannot escape from capture.",
     "seabattle": "Sea Battle"
