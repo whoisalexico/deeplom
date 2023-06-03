@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { BoardContext } from "../context";
 import Ship from "../Ship";
+import {useTranslation} from "next-i18next";
 
 function ShipSelect({ ships }) {
+    const {t} = useTranslation("common")
 
     const { dragStart } = useContext(BoardContext);
     const holders = [];
@@ -28,7 +30,7 @@ function ShipSelect({ ships }) {
     }
     return (
         <div className="ship-select">
-          <h4>Drag to the field and click to rotate</h4>
+          <h4>{t("shipplacement")}</h4>
           <div className="ship-wrapper">
             {holders}
           </div>

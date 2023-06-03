@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useAuth} from "../../context/AuthContext";
 import {addDoc, collection, getDocs, getFirestore, query, where} from "firebase/firestore";
 import {useTranslation} from "next-i18next";
+import Fireworks from '@fireworks-js/react'
 
 const Game = ({options, setOptions}) => {
     const [cardGame, setCardGame] = useState([]);
@@ -15,7 +16,8 @@ const Game = ({options, setOptions}) => {
     const {user} = useAuth();
     const game = 'Find Pair';
     const pts = Math.floor(Math.random() * (1200-800) + 800);
-    const {t} = useTranslation("common")
+    const {t} = useTranslation("common");
+
 
 
     const setPoints = async (pts, game) => {
@@ -125,11 +127,29 @@ const Game = ({options, setOptions}) => {
         return (
             <>
                 {isFinished && cardGame.length > 0 ? (
-                    <div className={styles.modal}>
-                        <p className={styles.congratz}>{t("uwon")}</p>
-                        <Link href="find-pair" onClick={()=>{newGame()}}>{t("playagain")}</Link>
-                        <Link onClick={()=>{setPoints(pts, game)}} href="/games">{t("backtogames")}</Link>
-                    </div>
+                    <>
+                        <div className={styles.modal}>
+                            <p className={styles.congratz}>{t("uwon")}</p>
+                            <Link href="find-pair" onClick={()=>{newGame()}}>{t("playagain")}</Link>
+                            <Link onClick={()=>{setPoints(pts, game)}} href="/games">{t("backtogames")}</Link>
+                        </div>
+                        <Fireworks
+                            options={{
+                                rocketsPoint: {
+                                    min: 0,
+                                    max: 100
+                                }
+                            }}
+                            style={{
+                                top: 82,
+                                left: 0,
+                                width: '100%',
+                                height: 'calc(100vh - 164px)',
+                                position: 'fixed',
+                                background: 'transparent'
+                            }}
+                        />
+                    </>
                 ) : (
                     <div id={styles.cards}>
                         {cardGame.map((card, index) => (

@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useTranslation} from "next-i18next";
 import {useAuth} from "../../../context/AuthContext";
 import {addDoc, collection, getDocs, getFirestore, query, where} from "firebase/firestore";
+import Fireworks from "@fireworks-js/react";
 
 function GameEnd({ setBoard1, setBoard2 }) {
 
@@ -43,13 +44,34 @@ function GameEnd({ setBoard1, setBoard2 }) {
     }
     return (
         <>
+
             {
                 winner !== null && (
-                    <div className="game-end-container">
-                        <p>{winner === 0 ? t("ulose") : t("uwon")}</p>
-                        <Link onClick={()=>resetGame()} href="sea-battle">{t("playagain")}</Link>
-                        <Link onClick={()=>setPoints(pts, game)} href="/games">{t("backtogames")}</Link>
-                    </div>
+                    <>
+                        <div className="game-end-container">
+                            <p>{winner === 0 ? t("ulose") : t("uwon")}</p>
+                            <Link onClick={()=>resetGame()} href="sea-battle">{t("playagain")}</Link>
+                            <Link onClick={()=>setPoints(pts, game)} href="/games">{t("backtogames")}</Link>
+                        </div>
+                        {winner === 1 ? (
+                            <Fireworks
+                                options={{
+                                    rocketsPoint: {
+                                        min: 0,
+                                        max: 100
+                                    }
+                                }}
+                                style={{
+                                    top: 82,
+                                    left: 0,
+                                    width: '100%',
+                                    height: 'calc(100vh - 164px)',
+                                    position: 'fixed',
+                                    background: 'transparent'
+                                }}
+                            />
+                        ) : (<></>)}
+                    </>
                 )
             }
         </>

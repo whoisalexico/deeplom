@@ -18,6 +18,7 @@ import Link from "next/link";
 import {useAuth} from "../../../context/AuthContext";
 import {collection, addDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
 import {useTranslation} from "next-i18next";
+import Fireworks from "@fireworks-js/react";
 
 const Board = () => {
     const {t} = useTranslation("common")
@@ -31,6 +32,8 @@ const Board = () => {
     const gameWon = useAppSelector(selectGameWon);
     const [status, setStatus] = useState(false)
     const pts = Math.floor(Math.random() * (1200-800) + 800);
+    const playerColor = gameColor;
+
     const setPoints = async (pts, game) => {
         try {
             const db = getFirestore();
@@ -315,7 +318,6 @@ const Board = () => {
             }
             return false;
         };
-        // PAWN
         const checkEatableFiguresByPawn = () => {
             if (figure.color === Colors.BLACK) {
                 checkEatableCell(figure.x - 1, figure.y - 1);
@@ -349,7 +351,6 @@ const Board = () => {
             }
             checkEatableFiguresByPawn();
         }
-        // ROOK
         const checkEatableFiguresByRook = () => {
             // check top
             for (let i = figure.y + 1; i <= 8; i++) {
@@ -379,7 +380,6 @@ const Board = () => {
             horizontalRight(8);
             checkEatableFiguresByRook();
         }
-        // KNIGHT
         const checkMovesByKnight = () => {
             checkCellForMove(figure.x + 1, figure.y + 2);
             checkCellForMove(figure.x - 1, figure.y + 2);
@@ -404,12 +404,10 @@ const Board = () => {
             checkMovesByKnight();
             checkEatableFiguresByKnight();
         }
-        // BISHOP
         if (figure.name === Figures.BISHOP) {
             checkDiagonal();
             checkEatableFiguresByDiagonal();
         }
-        // QUEEN
         if (figure.name === Figures.QUEEN) {
             checkDiagonal();
             checkEatableFiguresByDiagonal();
@@ -419,7 +417,6 @@ const Board = () => {
             horizontalRight(8);
             checkEatableFiguresByRook();
         }
-        // KING
         const checkKingDiagonal = () => {
             checkCellForMove(figure.x + 1, figure.y + 1);
             checkCellForMove(figure.x + 1, figure.y - 1);
@@ -524,11 +521,30 @@ const Board = () => {
             return null;
         const color = gameWon[0].toUpperCase() + gameWon.slice(1);
         return (
-            <div className={styles.gameWon}>
-                <h2 className={styles.gameWonTitle}>{t(`chess${color}`)} {t("chesswon")}</h2>
-                <Link href="/games" className={styles.gameWonButton} onClick={()=>setPoints(pts, game)}>{t("backtogames")}</Link>
-                <Link href="chess" onClick={() => {startNewGame()}}>{t("playagain")}</Link>
-            </div>
+            <>
+                <div className={styles.gameWon}>
+                    <h2 className={styles.gameWonTitle}>{color === playerColor ? (t('uwon')):(t('ulose'))}</h2>
+                    <Link href="/games" className={styles.gameWonButton} onClick={()=>setPoints(pts, game)}>{t("backtogames")}</Link>
+                    <Link href="chess" onClick={() => {startNewGame()}}>{t("playagain")}</Link>
+                </div>
+                {color === playerColor ? (<Fireworks
+                    options={{
+                        rocketsPoint: {
+                            min: 0,
+                            max: 100
+                        }
+                    }}
+                    style={{
+                        top: 82,
+                        left: 0,
+                        width: '100%',
+                        height: 'calc(100vh - 164px)',
+                        position: 'fixed',
+                        background: 'transparent'
+                    }}
+                />): (<></>)}
+
+            </>
         )
     };
 

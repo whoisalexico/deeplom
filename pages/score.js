@@ -70,7 +70,6 @@ const Score = () => {
     const setRes = async () => {
         const res = await getData();
         setRows([...res]);
-        console.log(rows)
     }
 
     const handleChange = (event, newValue) => {
@@ -91,7 +90,6 @@ const Score = () => {
                 setDbName("SeaBattleLeaderboard");
                 break;
         }
-        console.log(dbName)
         setValue(newValue);
 
     };

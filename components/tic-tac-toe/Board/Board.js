@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useTranslation} from "next-i18next";
 import {useAuth} from "../../../context/AuthContext";
 import {addDoc, collection, getDocs, getFirestore, query, where} from "firebase/firestore";
+import Fireworks from "@fireworks-js/react";
 
 function Board({setScores, size}) {
     const [nodes, setNodes] = useState({});
@@ -235,12 +236,32 @@ function Board({setScores, size}) {
     };
     return (
         <div className={s.board} style={{"--size": size}}>
-            {isTerminal(board).winner === "X" || isTerminal(board).winner === "O" ? (
-                <div className={s.modal}>
-                    <p>{isTerminal(board).winner === "X" ? t("uwon") : t("ulose")}</p>
-                    <Link onClick={() => gameReset()} href="tic-tac-toe">{t("playagain")}</Link>
-                    <Link onClick={() => setPoints(pts,game)} href="/games">{t("backtogames")}</Link>
-                </div>
+            {isTerminal(board).winner === "X" || isTerminal(board).winner === "O" || isTerminal(board).winner === "draw" ? (
+                <>
+                    <div className={s.modal}>
+                        <p>{isTerminal(board).winner === "X" ? t("uwon") : isTerminal(board).winner === "O" ? t("ulose") : t("draw")}</p>
+                        <Link onClick={() => gameReset()} href="tic-tac-toe">{t("playagain")}</Link>
+                        <Link onClick={() => setPoints(pts,game)} href="/games">{t("backtogames")}</Link>
+                    </div>
+                    {isTerminal(board).winner === "X" ? (
+                        <Fireworks
+                            options={{
+                                rocketsPoint: {
+                                    min: 0,
+                                    max: 100
+                                }
+                            }}
+                            style={{
+                                top: 82,
+                                left: 0,
+                                width: '100%',
+                                height: 'calc(100vh - 164px)',
+                                position: 'fixed',
+                                background: 'transparent'
+                            }}
+                        />
+                    ):(<></>)}
+                </>
             ) : (
                 <>
                     {board.map((val, i) => {

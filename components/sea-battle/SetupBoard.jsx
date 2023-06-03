@@ -7,11 +7,12 @@ import ModifyBoard from "./Setup/ModifyBoard.jsx";
 import Select from "./Setup/Select";
 import Table from "./Setup/Table";
 import Button from "./UI/button/Button";
+import {useTranslation} from "next-i18next";
 
 function SetupBoard({scale, setBoard1, difficulty, setDifficulty}) {
     const [board, setBoard] = useState([]);
     const [ships, setShips] = useState(getSetupShips());
-
+    const {t} = useTranslation("common")
     const [changes, setChanges] = useState(false);
     const [current, setCurrent] = useState({
         target: null,
@@ -174,7 +175,7 @@ function SetupBoard({scale, setBoard1, difficulty, setDifficulty}) {
                         disabled={board.length !== 10}
                         onClick={board.length === 10 ? () => updateBoard() : null}
                     >
-                        START GAME
+                        {t("startnewgame")}
                     </Button>
                 </div>
 
