@@ -33,6 +33,7 @@ const Board = () => {
     const [status, setStatus] = useState(false)
     const pts = Math.floor(Math.random() * (1200-800) + 800);
     const playerColor = gameColor;
+    console.log(playerColor)
 
     const setPoints = async (pts, game) => {
         try {
@@ -519,7 +520,7 @@ const Board = () => {
     const getGameWonJSX = () => {
         if (!gameWon)
             return null;
-        const color = gameWon[0].toUpperCase() + gameWon.slice(1);
+        const color = gameWon;
         return (
             <>
                 <div className={styles.gameWon}>
