@@ -39,7 +39,6 @@ export const AuthContextProvider = ({children}) => {
         }catch (e){
             console.log(e)
         }
-        //return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const login = (email, password) =>{

@@ -10,6 +10,7 @@ import Button from "./UI/button/Button";
 import {useTranslation} from "next-i18next";
 
 function SetupBoard({scale, setBoard1, difficulty, setDifficulty}) {
+
     const [board, setBoard] = useState([]);
     const [ships, setShips] = useState(getSetupShips());
     const {t} = useTranslation("common")
@@ -78,7 +79,6 @@ function SetupBoard({scale, setBoard1, difficulty, setDifficulty}) {
         }
     }, [current, overlapCells])
 
-    /* Push cells where ship will be placed */
     function setCell(hoverX, hoverY) {
         if (current.target === null) return;
         const {w, h} = current.ship;
@@ -92,12 +92,10 @@ function SetupBoard({scale, setBoard1, difficulty, setDifficulty}) {
         setChanges(!changes);
     }
 
-    /* Start dragging ship */
     function dragStart(event, ship) {
         const {w, h} = ship;
         const bounds = event.target.getBoundingClientRect();
 
-        // Get index of the cell that cursor is pointing to [x, y]
         const offsetX = event.nativeEvent.offsetX || 0;
         const offsetY = event.nativeEvent.offsetY || 0;
         let mapX = Math.floor(map(offsetX * scale, 0, bounds.width, 0, w + 1));
@@ -105,20 +103,15 @@ function SetupBoard({scale, setBoard1, difficulty, setDifficulty}) {
         mapX = clamp(mapX, 0, Infinity);
         mapY = clamp(mapY, 0, Infinity);
 
-        // Align ship to the cursor
         const width = (40 * (mapX + 1) - 20) * scale;
         const height = (40 * (mapY + 1) - 20) * scale;
         const posx = bounds.left + width;
         const posy = bounds.top + height;
 
-        // Do not align ship to the cursor position
-        /* const posx = event.clientX;
-        const posy = event.clientY; */
 
         setCurrent({target: event.target, x: posx, y: posy, ship, mapX, mapY});
     }
 
-    /* Rotate ship */
     function rotate(event, ship) {
         if (canRotate(board, ship)) {
             rotateShip(board, ship);

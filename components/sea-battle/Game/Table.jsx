@@ -5,11 +5,14 @@ import { getBoundsCells, getWreckedShip, touchedShip } from "../utils/Board";
 import { GameContext } from "../context";
 import ShipList from "./ShipList";
 import { getChar } from "../utils/Common";
+import {useTranslation} from "next-i18next";
 
 function Table({ type, board, classNames }) {
 
     const { turn, setTurn, getMove, removeMove, winner, setWinner } = useContext(GameContext);
     const classList = ["table-centered"];
+    const {t} = useTranslation("common")
+
     if (classNames && classNames.length) classList.push(...classNames.split(" "));
 
     const [clickedCells, setClickedCells] = useState([]);
@@ -120,7 +123,7 @@ function Table({ type, board, classNames }) {
     if (type === 1 && turn && winner === null) tableNames.push("disabled");
     return (
         <div className={classList.join(" ")}>
-            <h2 className="table-head-text">{ (type ? "Opponent" : "Your") + " board" }</h2>
+            <h2 className="table-head-text">{ (type ? t("opponent") : t("your"))}</h2>
             <table className={tableNames.join(" ")}>
                 <tbody>
                     {rows}

@@ -3,10 +3,13 @@ import { BoardContext } from "../context";
 import Cell from "./Cell";
 import Ship from "../Ship";
 import { getChar } from "../utils/Common";
+import {useTranslation} from "next-i18next";
 
 function TableShip() {
     const { board, dragStart, rotate } = useContext(BoardContext);
-    
+    const {t} = useTranslation("common")
+
+
     const rows = [];
     for (let row=0;row<10;row++) {
         const cells = [];
@@ -36,7 +39,7 @@ function TableShip() {
 
     return (
         <div className="table-centered">
-            <h2 className="table-head-text">Your board</h2>
+            <h2 className="table-head-text">{t("your")}</h2>
             <table className="table-ship">
                 <tbody>
                     {rows}

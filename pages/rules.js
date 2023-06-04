@@ -67,23 +67,51 @@ const Rules = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            <p className={s.gameDescription}>{t("chessdesc")} <br/> {t("chessgoal")}</p>
+                            <p className={s.gameDescription}>{t("chessfield")} <br/>{t("chessdesc")} <br/> {t("chessgoal")}<br/> {t("chessking")}<br/> {t("chessqueen")}<br/>{t("chessbishop")}<br/>{t("chessrook")}<br/>{t("chessknight")}<br/>{t("chesspawn")}</p>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
                 <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                     <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                        <Typography>{t("flipcard")}</Typography>
+                        <Typography><p className={s.gameTitle}>{t("flipcard")}</p></Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                            sit amet blandit leo lobortis eget.
+                            <p className={s.gameDescription}>{t("fpr")}</p>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
+                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                    <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+                        <Typography><p className={s.gameTitle}>{t("puzzle")}</p></Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <p className={s.gameDescription}>{t("tr")}</p>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                    <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+                        <Typography><p className={s.gameTitle}>{t("tictactoe")}</p></Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <p className={s.gameDescription}>{t("tttr")}</p>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+                    <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
+                        <Typography><p className={s.gameTitle}>{t("seabattle")}</p></Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <p className={s.gameDescription}>{t("sbr")} <br/> {t("sbg")} <br/> {t("sbrsp")} <br/> {t("sbrm")} </p>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
             </div>
         </>
     );
