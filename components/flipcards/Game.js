@@ -7,7 +7,7 @@ import {addDoc, collection, getDocs, getFirestore, query, where} from "firebase/
 import {useTranslation} from "next-i18next";
 import Fireworks from '@fireworks-js/react'
 
-const Game = ({options, setOptions}) => {
+const Game = ({options, setOptions, bg}) => {
     const [cardGame, setCardGame] = useState([]);
     const [flippedCardPairs, setFlippedCardPairs] = useState(0);
     const [flippedIndexes, setFlippedIndexes] = useState([]);
@@ -15,9 +15,8 @@ const Game = ({options, setOptions}) => {
     const [isNewGame, setIsNewGame] = useState(false)
     const {user} = useAuth();
     const game = 'Find Pair';
-    const pts = Math.floor(Math.random() * (1200-800) + 800);
+    const pts = Math.floor(Math.random() * (1200 - 800) + 800);
     const {t} = useTranslation("common");
-
 
 
     const setPoints = async (pts, game) => {
@@ -27,16 +26,16 @@ const Game = ({options, setOptions}) => {
             const q = query(collectionRef, where("id", "==", user.uid))
             const snap = await getDocs(q);
             let nickname;
-            snap.forEach((doc)=>{
+            snap.forEach((doc) => {
                 const data = doc.data();
                 nickname = data.nickname;
             })
-            const docRef = await addDoc(collection(db, "FindPairLeaderboard"),{
+            const docRef = await addDoc(collection(db, "FindPairLeaderboard"), {
                 nickname: nickname,
                 game: game,
                 score: pts,
             })
-        }catch (e) {
+        } catch (e) {
 
         }
 
@@ -62,6 +61,26 @@ const Game = ({options, setOptions}) => {
         '#F7AEF8'
     ]
 
+    const images = [
+        "url(/img/flipCardsGame/ananas.svg)",
+        "url(/img/flipCardsGame/banana.svg)",
+        "url(/img/flipCardsGame/grape.svg)",
+        "url(/img/flipCardsGame/coconut.svg)",
+        "url(/img/flipCardsGame/dragonfruit.svg)",
+        "url(/img/flipCardsGame/fig.svg)",
+        "url(/img/flipCardsGame/kiwi.svg)",
+        "url(/img/flipCardsGame/lemon.svg)",
+        "url(/img/flipCardsGame/mango.svg)",
+        "url(/img/flipCardsGame/onenhalfga.svg)",
+        "url(/img/flipCardsGame/papaya.svg)",
+        "url(/img/flipCardsGame/passionfruit.svg)",
+        "url(/img/flipCardsGame/peach.svg)",
+        "url(/img/flipCardsGame/plum.svg)",
+        "url(/img/flipCardsGame/pomegranate.svg)",
+        "url(/img/flipCardsGame/redapple.svg)",
+        "url(/img/flipCardsGame/strawberry.svg)",
+        "url(/img/flipCardsGame/watermelon.svg)",
+    ]
 
     const newGame = () => {
         setIsNewGame(!isNewGame)
@@ -82,13 +101,13 @@ const Game = ({options, setOptions}) => {
             const firstOption = {
                 id: 2 * i,
                 colorId: i,
-                color: colors[i],
+                color: bg === "images" ? images[i] : colors[i],
                 flipped: false
             }
             const secondOption = {
                 id: 2 * i + 1,
                 colorId: i,
-                color: colors[i],
+                color: bg === "images" ? images[i] : colors[i],
                 flipped: false
             };
             newGame.push(firstOption);
@@ -101,7 +120,6 @@ const Game = ({options, setOptions}) => {
     useEffect(() => {
         setFinished(!cardGame.some((card) => !card.flipped));
     }, [cardGame]);
-
 
 
     if (flippedIndexes.length === 2) {
@@ -130,8 +148,12 @@ const Game = ({options, setOptions}) => {
                     <>
                         <div className={styles.modal}>
                             <p className={styles.congratz}>{t("uwon")}</p>
-                            <Link href="find-pair" onClick={()=>{newGame()}}>{t("playagain")}</Link>
-                            <Link onClick={()=>{setPoints(pts, game)}} href="/games">{t("backtogames")}</Link>
+                            <Link href="find-pair" onClick={() => {
+                                newGame()
+                            }}>{t("playagain")}</Link>
+                            <Link onClick={() => {
+                                setPoints(pts, game)
+                            }} href="/games">{t("backtogames")}</Link>
                         </div>
                         <Fireworks
                             options={{
@@ -157,7 +179,7 @@ const Game = ({options, setOptions}) => {
                                 <Card id={index} color={card.color} cardGame={cardGame}
                                       flippedCardPairs={flippedCardPairs}
                                       setFlippedCardPairs={setFlippedCardPairs} flippedIndexes={flippedIndexes}
-                                      setFlippedIndexes={setFlippedIndexes}/>
+                                      setFlippedIndexes={setFlippedIndexes} bg={bg} images={card.color}/>
                             </div>
                         ))}
                     </div>

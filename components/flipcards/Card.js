@@ -3,7 +3,7 @@ import {useSpring, animated} from "react-spring";
 import styles from "./Card.module.scss"
 
 
-const Card = ({id, color, cardGame, flippedCardPairs, setFlippedCardPairs, flippedIndexes, setFlippedIndexes}) => {
+const Card = ({id, color, cardGame, flippedCardPairs, setFlippedCardPairs, flippedIndexes, setFlippedIndexes, bg, images}) => {
     const [flipped, setFlipped] = useState(false);
     const {transform, opacity} = useSpring({
         opacity: flipped ? 1 : 0,
@@ -43,7 +43,7 @@ const Card = ({id, color, cardGame, flippedCardPairs, setFlippedCardPairs, flipp
     return (
         <div onClick={onClickCard}>
             <animated.div className={styles.card} style={{opacity: opacity.to((o)=> 1 - o), transform,}}/>
-            <animated.div className={styles.card} style={{opacity, transform: transform.to((t)=>`${t} rotateX(180deg)`), background: color}}/>
+            <animated.div className={styles.card} style={{opacity, transform: transform.to((t)=>`${t} rotateX(180deg)`), backgroundColor: bg==="colors"? color: '#fff', backgroundImage: bg==="images"? images : 'none', backgroundSize: 'auto', backgroundRepeat: 'no-repeat', backgroundPositionX: "center"}}/>
         </div>
     );
 };
